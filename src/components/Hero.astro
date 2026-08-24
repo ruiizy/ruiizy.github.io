@@ -1,7 +1,40 @@
-<section class="mx-auto flex max-w-4xl flex-col gap-4 px-6 py-24">
-	<p class="text-sm font-medium text-neutral-400">Hola, soy</p>
-	<h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Rafael Galvez Ruiz</h1>
-	<p class="max-w-xl text-lg text-neutral-400">
-		Breve descripcion de que haces y a que te dedicas. Editar en src/components/Hero.astro.
-	</p>
+<section class="relative z-0 overflow-hidden px-8 py-24 sm:py-28">
+	<span
+		class="ghost-num pointer-events-none absolute -top-8 -right-2 -z-10 select-none font-serif text-[200px] leading-none italic text-transparent opacity-10 [-webkit-text-stroke:1px_currentColor] sm:text-[260px]"
+	>
+		01
+	</span>
+	<div class="relative mx-auto max-w-[720px]">
+		<p class="js-hero-eyebrow mb-5 inline-flex items-center gap-2 text-[13px] font-semibold tracking-[0.14em] text-accent uppercase">
+			<svg class="js-spark shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+				<path d="M12 2 L14.2 9.8 L22 12 L14.2 14.2 L12 22 L9.8 14.2 L2 12 L9.8 9.8 Z" />
+			</svg>
+			Hi, I'm
+		</p>
+		<h1 class="font-normal">
+			<span class="js-hero-line1 block font-serif text-7xl leading-[0.86] tracking-tight sm:text-8xl md:text-[118px]">
+				Rafael
+			</span>
+			<span class="js-hero-line2 mt-1 block font-serif text-7xl leading-[0.86] tracking-tight text-accent italic sm:text-8xl md:text-[118px]">
+				Galvez Ruiz
+			</span>
+		</h1>
+		<p class="js-hero-role mt-7 text-lg font-semibold text-muted">
+			Full-stack developer
+		</p>
+		<div class="js-hero-quote mt-[18px] border-l-2 border-accent pl-[18px]">
+			<p class="max-w-[440px] text-base leading-relaxed text-faint italic">
+				[Add a short description of your experience and what you do.]
+			</p>
+		</div>
+		<a href="#projects" class="js-hero-cta group mt-10 inline-flex items-center gap-3.5">
+			<span class="flex h-[46px] w-[46px] items-center justify-center rounded-full bg-ink transition-all duration-200 group-hover:rotate-45 group-hover:bg-accent">
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-cream)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M7 17L17 7" />
+					<path d="M7 7h10v10" />
+				</svg>
+			</span>
+			<span class="text-[14px] font-semibold tracking-wide uppercase">View work</span>
+		</a>
+	</div>
 </section>

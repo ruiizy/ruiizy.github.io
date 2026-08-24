@@ -8,8 +8,8 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		title: 'Proyecto ejemplo',
-		description: 'Descripcion corta del proyecto. Edita este array en src/data/projects.ts.',
+		title: 'Example project',
+		description: '[Short project description — replace with your content in src/data/projects.ts.]',
 		tags: ['Astro', 'TypeScript'],
 		link: '#',
 		repo: '#',
