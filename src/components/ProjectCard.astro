@@ -10,16 +10,16 @@ const { project, index } = Astro.props;
 const num = String(index).padStart(2, '0');
 ---
 
-<article class="js-reveal group grid grid-cols-[56px_1fr_auto] items-start gap-6 border-b border-cream/15 py-7">
+<article class="js-reveal group grid grid-cols-[32px_1fr] items-start gap-x-4 gap-y-4 border-b border-cream/15 py-7 sm:grid-cols-[56px_1fr_auto] sm:gap-x-6">
 	<span class="font-serif text-lg text-accent italic">{num}</span>
 	<div class="flex flex-col gap-2.5">
-		<h3 class="font-serif text-3xl font-normal transition-colors duration-200 group-hover:text-accent">
+		<h3 class="font-serif text-2xl font-normal transition-colors duration-200 group-hover:text-accent sm:text-3xl">
 			{project.title}
 		</h3>
-		<p class="max-w-[460px] text-sm leading-relaxed text-cream/60 italic">
+		<p class="max-w-[460px] text-sm leading-relaxed text-cream/75">
 			{project.description}
 		</p>
-		<div class="mt-1.5 flex gap-2.5">
+		<div class="mt-1.5 flex flex-wrap gap-2.5">
 			{project.tags.map((tag) => (
 				<span class="rounded-full border border-cream/25 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-cream/75 uppercase">
 					{tag}
@@ -27,7 +27,7 @@ const num = String(index).padStart(2, '0');
 			))}
 		</div>
 	</div>
-	<div class="flex flex-col items-end gap-3 pt-1.5">
+	<div class="col-span-2 flex flex-row items-center gap-5 pl-11 sm:col-span-1 sm:flex-col sm:items-end sm:gap-3 sm:pt-1.5 sm:pl-0">
 		{project.link && (
 			<a href={project.link} class="flex items-center gap-2 text-sm font-medium">
 				View

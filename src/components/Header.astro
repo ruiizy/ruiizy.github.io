@@ -13,7 +13,7 @@ const social = [
 ---
 
 <header class="sticky top-0 z-20 border-b border-line bg-cream/85 backdrop-blur">
-	<nav class="mx-auto flex max-w-[1080px] items-center justify-between px-8 py-[18px]">
+	<nav class="mx-auto flex max-w-[1080px] items-center justify-between px-6 py-[14px] sm:px-8 sm:py-[18px]">
 		<a href="#" class="flex items-center gap-3">
 			<span
 				class="flex h-10 w-10 items-center justify-center rounded-full bg-ink font-sans text-[13px] font-bold tracking-wide text-cream"
@@ -22,7 +22,7 @@ const social = [
 			</span>
 			<span class="font-serif text-xl italic">Rafael Galvez</span>
 		</a>
-		<ul class="flex items-center gap-8 text-[13px] font-medium tracking-wide text-muted uppercase">
+		<ul class="hidden items-center gap-8 text-[13px] font-medium tracking-wide text-muted uppercase md:flex">
 			{links.map((link) => (
 				<li>
 					<a href={link.href} class="transition-colors hover:text-ink">{link.label}</a>
@@ -34,5 +34,60 @@ const social = [
 				))}
 			</li>
 		</ul>
+		<button
+			id="menu-toggle"
+			type="button"
+			aria-label="Toggle menu"
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+			class="flex h-10 w-10 items-center justify-center md:hidden"
+		>
+			<svg id="menu-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+				<path d="M3 6h18M3 12h18M3 18h18" />
+			</svg>
+			<svg id="menu-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden">
+				<path d="M6 6l12 12M18 6L6 18" />
+			</svg>
+		</button>
 	</nav>
+	<ul
+		id="mobile-menu"
+		class="hidden flex-col gap-1 border-t border-line px-6 py-4 text-[13px] font-medium tracking-wide text-muted uppercase md:hidden"
+	>
+		{links.map((link) => (
+			<li>
+				<a href={link.href} class="block py-2 transition-colors hover:text-ink">{link.label}</a>
+			</li>
+		))}
+		<li class="mt-2 flex items-center gap-5 border-t border-line pt-3 normal-case">
+			{social.map((s) => (
+				<a href={s.href} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-accent">{s.label}</a>
+			))}
+		</li>
+	</ul>
 </header>
+
+<script>
+	const toggle = document.getElementById('menu-toggle');
+	const menu = document.getElementById('mobile-menu');
+	const iconOpen = document.getElementById('menu-icon-open');
+	const iconClose = document.getElementById('menu-icon-close');
+
+	toggle?.addEventListener('click', () => {
+		const isOpen = menu?.classList.toggle('flex');
+		menu?.classList.toggle('hidden');
+		iconOpen?.classList.toggle('hidden');
+		iconClose?.classList.toggle('hidden');
+		toggle.setAttribute('aria-expanded', String(!!isOpen));
+	});
+
+	menu?.querySelectorAll('a').forEach((a) => {
+		a.addEventListener('click', () => {
+			menu.classList.add('hidden');
+			menu.classList.remove('flex');
+			iconOpen?.classList.remove('hidden');
+			iconClose?.classList.add('hidden');
+			toggle?.setAttribute('aria-expanded', 'false');
+		});
+	});
+</script>
