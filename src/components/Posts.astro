@@ -8,14 +8,14 @@ import { posts } from '../data/posts';
 	>
 		05
 	</span>
-	<div class="relative mx-auto max-w-[1080px]">
+	<div class="relative mx-auto max-w-270">
 		<p class="js-reveal mb-2 text-[13px] font-semibold tracking-[0.14em] text-accent uppercase">Journal</p>
 		<h2 class="js-reveal mb-9 font-serif text-4xl font-normal italic">Posts</h2>
 		<div class="flex flex-col">
 			{posts.map((post) => (
 				<a
 					href={post.link ?? '#'}
-					class="js-reveal group flex flex-col gap-2 border-b border-line py-[26px] sm:grid sm:grid-cols-[140px_1fr_auto] sm:items-start sm:gap-6"
+					class="js-reveal group flex flex-col gap-2 border-b border-line py-6.5 sm:grid sm:grid-cols-[140px_1fr_auto] sm:items-start sm:gap-6"
 				>
 					<div class="flex items-center justify-between sm:contents">
 						<span class="text-[13px] font-semibold tracking-wide text-faint uppercase sm:pt-1.5">{post.date}</span>
@@ -29,7 +29,7 @@ import { posts } from '../data/posts';
 						<h3 class="font-serif text-2xl font-normal transition-colors duration-200 group-hover:text-accent">
 							{post.title}
 						</h3>
-						<p class="max-w-[480px] text-sm leading-relaxed text-ink/70">{post.excerpt}</p>
+						<p class="max-w-120 text-sm leading-relaxed text-ink/70">{post.excerpt}</p>
 					</div>
 				</a>
 			))}
