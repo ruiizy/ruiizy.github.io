@@ -5,6 +5,11 @@ const links = [
 	{ href: '#posts', label: 'Posts' },
 	{ href: '#contact', label: 'Contact' },
 ];
+
+const social = [
+	{ href: 'https://github.com/ruiizy', label: 'GitHub' },
+	{ href: 'https://www.linkedin.com/in/rgrz/', label: 'LinkedIn' },
+];
 ---
 
 <header class="sticky top-0 z-20 border-b border-line bg-cream/85 backdrop-blur">
@@ -17,12 +22,17 @@ const links = [
 			</span>
 			<span class="font-serif text-xl italic">Rafael Galvez</span>
 		</a>
-		<ul class="flex gap-8 text-[13px] font-medium tracking-wide text-muted uppercase">
+		<ul class="flex items-center gap-8 text-[13px] font-medium tracking-wide text-muted uppercase">
 			{links.map((link) => (
 				<li>
 					<a href={link.href} class="transition-colors hover:text-ink">{link.label}</a>
 				</li>
 			))}
+			<li class="flex items-center gap-5 border-l border-line pl-8 normal-case">
+				{social.map((s) => (
+					<a href={s.href} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-accent">{s.label}</a>
+				))}
+			</li>
 		</ul>
 	</nav>
 </header>

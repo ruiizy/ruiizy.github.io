@@ -8,10 +8,17 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		title: 'Example project',
-		description: '[Short project description — replace with your content in src/data/projects.ts.]',
-		tags: ['Astro', 'TypeScript'],
-		link: '#',
-		repo: '#',
+		title: 'Elmi Harness',
+		description:
+			'Terminal-based AI coding agent in Go, running Claude and local Ollama models through an OpenAI-compatible adapter. REPL with a permission state machine gating shell exec, file reads and writes.',
+		tags: ['Go', 'Claude API', 'Ollama', 'CLI'],
+		repo: 'https://github.com/ruiizy/elmi-harness',
+	},
+	{
+		title: 'Purchase System',
+		description:
+			'Microservices-based purchase platform split into inventory, order and notification services, modeling a distributed e-commerce checkout flow.',
+		tags: ['Python', 'Microservices'],
+		repo: 'https://github.com/ruiizy/purchase-system',
 	},
 ];

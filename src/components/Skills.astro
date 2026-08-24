@@ -1,0 +1,40 @@
+---
+const groups = [
+	{
+		label: 'AI / Agents',
+		items: ['Python', 'LangChain', 'LangGraph', 'MCP', 'Qdrant', 'LlamaIndex'],
+	},
+	{
+		label: 'Frontend',
+		items: ['React', 'TypeScript', 'Angular'],
+	},
+	{
+		label: 'Backend',
+		items: ['Java', 'Spring Boot'],
+	},
+];
+---
+
+<section class="relative overflow-hidden border-t border-line px-8 py-16 sm:py-18">
+	<span
+		class="ghost-num pointer-events-none absolute -top-5 -right-2 -z-10 select-none font-serif text-[200px] leading-none italic text-transparent opacity-10 [-webkit-text-stroke:1px_currentColor]"
+	>
+		03
+	</span>
+	<div class="relative mx-auto max-w-[1080px]">
+		<p class="js-reveal mb-2 text-[13px] font-semibold tracking-[0.14em] text-accent uppercase">Toolbox</p>
+		<h2 class="js-reveal mb-9 font-serif text-4xl font-normal italic">Stack</h2>
+		<div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+			{groups.map((group) => (
+				<div class="js-reveal">
+					<p class="mb-3 text-[13px] font-semibold tracking-[0.14em] text-faint uppercase">{group.label}</p>
+					<ul class="flex flex-col gap-1.5">
+						{group.items.map((item) => (
+							<li class="font-serif text-xl italic text-muted">{item}</li>
+						))}
+					</ul>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
