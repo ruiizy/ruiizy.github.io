@@ -1,5 +1,8 @@
 ---
 import TilePanel from './TilePanel.astro';
+import { copy, toLang } from '../i18n/utils';
+
+const c = copy(toLang(Astro.currentLocale));
 
 const email = 'ruizgalvezrafael@gmail.com';
 
@@ -41,17 +44,17 @@ const board = [
 					class="js-reveal mb-5 flex items-center gap-3.5 font-mono text-[12px] tracking-[0.1em] text-cal/85 uppercase"
 				>
 					<span class="h-px w-10 bg-albero"></span>
-					06 / contact
+					06 / {c.contact.eyebrow}
 				</div>
 
 				<h2
 					class="js-reveal font-display text-[clamp(2.75rem,9vw,6rem)] leading-[0.85] font-black tracking-[-0.03em] uppercase [font-stretch:85%]"
 				>
-					Hablamos
+					{c.contact.title}
 				</h2>
 
 				<p class="js-reveal mt-6 max-w-110 text-[15px] leading-relaxed text-cal/85 sm:text-base">
-					Agentes, MCP, arquitectura frontend — o simplemente para saludar.
+					{c.contact.lead}
 				</p>
 
 				<a

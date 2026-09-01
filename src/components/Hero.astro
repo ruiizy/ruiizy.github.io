@@ -1,9 +1,12 @@
 ---
 import TilePanel from './TilePanel.astro';
+import { copy, toLang } from '../i18n/utils';
+
+const c = copy(toLang(Astro.currentLocale));
 
 const meta = [
-	{ k: 'role', v: 'AI Engineer', tint: 'bg-anil' },
-	{ k: 'at', v: 'CaixaBank · AI Innovation', tint: 'bg-almagra' },
+	{ ...c.hero.role, tint: 'bg-anil' },
+	{ ...c.hero.at, tint: 'bg-almagra' },
 ];
 ---
 
@@ -27,7 +30,7 @@ const meta = [
 		<div class="lg:max-w-[60%]">
 			<p class="js-hero-eyebrow mb-6 flex items-center gap-3 font-mono text-[12.5px] text-almagra">
 				<span class="h-px w-10 bg-almagra"></span>
-				hola, soy
+				{c.hero.eyebrow}
 			</p>
 
 			<h1 class="font-display font-black uppercase [font-stretch:85%]">
@@ -48,17 +51,16 @@ const meta = [
 						<div class="border-b border-linea px-4 py-3.5 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0">
 							<span class="flex items-center gap-2">
 								<span class={`h-2 w-2 rotate-45 ${m.tint}`}></span>
-								<dt class="font-mono text-[11px] tracking-[0.1em] text-faint uppercase">{m.k}</dt>
+								<dt class="font-mono text-[11px] tracking-[0.1em] text-faint uppercase">{m.key}</dt>
 							</span>
-							<dd class="mt-1.5 text-[15px] font-semibold text-tinta">{m.v}</dd>
+							<dd class="mt-1.5 text-[15px] font-semibold text-tinta">{m.value}</dd>
 						</div>
 					))}
 				</dl>
 			</div>
 
 			<p class="js-hero-quote mt-8 max-w-125 text-base leading-relaxed text-muted sm:text-lg">
-				I build the bridge between high-performance frontend architectures and production-grade
-				agentic AI — designing stateful multi-agent workflows with LangGraph, LangChain and MCP.
+				{c.hero.bio}
 			</p>
 
 			<a
@@ -66,7 +68,7 @@ const meta = [
 				class="js-hero-cta panel panel-lift group mt-10 inline-flex items-stretch border border-tinta bg-cal font-mono text-[13px]"
 			>
 				<span class="bg-tinta px-5 py-3.5 text-cal transition-colors duration-200 group-hover:bg-anil">
-					ver trabajo
+					{c.hero.cta}
 				</span>
 				<span class="flex w-12 items-center justify-center transition-colors duration-200 group-hover:bg-cal-2">
 					<svg

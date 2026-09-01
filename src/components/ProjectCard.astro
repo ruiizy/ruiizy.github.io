@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../data/projects';
+import { copy, toLang } from '../i18n/utils';
 
 interface Props {
 	project: Project;
@@ -9,9 +10,12 @@ interface Props {
 const { project, index } = Astro.props;
 const num = String(index).padStart(2, '0');
 
+const lang = toLang(Astro.currentLocale);
+const c = copy(lang);
+
 const links = [
-	project.link ? { href: project.link, label: 'view' } : null,
-	project.repo ? { href: project.repo, label: 'code' } : null,
+	project.link ? { href: project.link, label: c.projects.view } : null,
+	project.repo ? { href: project.repo, label: c.projects.code } : null,
 ].filter(Boolean) as { href: string; label: string }[];
 ---
 
@@ -30,7 +34,7 @@ const links = [
 		>
 			{project.title}
 		</h3>
-		<p class="max-w-125 text-[15px] leading-relaxed text-cal/75">{project.description}</p>
+		<p class="max-w-125 text-[15px] leading-relaxed text-cal/75">{project.description[lang]}</p>
 		<ul class="mt-1 flex flex-wrap gap-2">
 			{project.tags.map((tag) => (
 				<li class="border border-cal/25 bg-cal/5 px-2.5 py-1 font-mono text-[11.5px] text-cal/80">

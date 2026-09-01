@@ -1,40 +1,29 @@
 ---
 import SectionHead from './SectionHead.astro';
 import TilePanel from './TilePanel.astro';
+import { copy, toLang } from '../i18n/utils';
+
+const c = copy(toLang(Astro.currentLocale));
 
 // Drawn strictly from the prose below — no dates, because none are claimed there.
 const track = [
-	{
-		when: 'now',
-		where: 'CaixaBank · AI Innovation',
-		what: 'Stateful multi-agent workflows',
-		tint: 'bg-anil',
-	},
-	{ when: 'before', where: 'NTT DATA · Softtek', what: 'Frontend, four years', tint: 'bg-almagra' },
-	{
-		when: 'study',
-		where: 'Universitat Oberta de Catalunya',
-		what: 'In progress',
-		tint: 'bg-verde',
-	},
+	{ ...c.about.track.now, where: 'CaixaBank · AI Innovation', tint: 'bg-anil' },
+	{ ...c.about.track.before, where: 'NTT DATA · Softtek', tint: 'bg-almagra' },
+	{ ...c.about.track.study, where: 'Universitat Oberta de Catalunya', tint: 'bg-verde' },
 ];
 ---
 
 <section id="about" class="relative px-6 py-16 sm:px-10 sm:py-20">
 	<div class="mx-auto max-w-280">
-		<SectionHead index="02" eyebrow="profile" title="About" />
+		<SectionHead index="02" eyebrow={c.about.eyebrow} title={c.about.title} />
 
 		<div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_340px] lg:gap-16">
 			<div class="js-reveal max-w-160">
 				<p class="border-l-2 border-almagra pl-5 text-lg leading-relaxed text-tinta sm:text-xl">
-					Currently at CaixaBank's AI Innovation team, I design stateful multi-agent workflows using
-					LangGraph, LangChain and Qdrant — turning complex PoCs into enterprise-ready products.
+					{c.about.lead}
 				</p>
 				<p class="mt-6 pl-5 text-base leading-relaxed text-muted">
-					I standardize LLM communication across services with the Model Context Protocol (MCP),
-					integrating GPT, Claude and local models into scalable backend pipelines. Before that, four
-					years as a frontend developer (React, Angular) at NTT DATA and Softtek. Studying at
-					Universitat Oberta de Catalunya.
+					{c.about.body}
 				</p>
 			</div>
 

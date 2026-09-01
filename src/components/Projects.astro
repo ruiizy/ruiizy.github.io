@@ -3,6 +3,9 @@ import { projects } from '../data/projects';
 import ProjectCard from './ProjectCard.astro';
 import SectionHead from './SectionHead.astro';
 import TilePanel from './TilePanel.astro';
+import { copy, toLang } from '../i18n/utils';
+
+const c = copy(toLang(Astro.currentLocale));
 ---
 
 <section id="projects" class="relative overflow-hidden bg-tinta text-cal">
@@ -24,7 +27,7 @@ import TilePanel from './TilePanel.astro';
 	</div>
 
 	<div class="relative mx-auto max-w-280 px-6 py-16 sm:px-10 sm:py-20">
-		<SectionHead index="04" eyebrow="work" title="Projects" tone="dark" />
+		<SectionHead index="04" eyebrow={c.projects.eyebrow} title={c.projects.title} tone="dark" />
 		<div class="border-t border-cal/15">
 			{projects.map((project, index) => <ProjectCard project={project} index={index + 1} />)}
 		</div>

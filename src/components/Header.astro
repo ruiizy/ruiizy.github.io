@@ -1,10 +1,16 @@
 ---
+import LangSwitch from './LangSwitch.astro';
+import { copy, homeOf, toLang } from '../i18n/utils';
+
+const lang = toLang(Astro.currentLocale);
+const c = copy(lang);
+
 const links = [
-	{ href: '#about', label: 'about' },
-	{ href: '#stack', label: 'stack' },
-	{ href: '#projects', label: 'work' },
-	{ href: '#posts', label: 'posts' },
-	{ href: '#contact', label: 'contact' },
+	{ href: '#about', label: c.nav.about },
+	{ href: '#stack', label: c.nav.stack },
+	{ href: '#projects', label: c.nav.work },
+	{ href: '#posts', label: c.nav.posts },
+	{ href: '#contact', label: c.nav.contact },
 ];
 
 const icons = {
@@ -27,7 +33,7 @@ const STAR =
 	<div class="cenefa junquillo h-4.5" aria-hidden="true"></div>
 	<div class="border-b border-linea bg-cal/90 backdrop-blur-sm">
 		<nav class="mx-auto flex max-w-280 items-center justify-between px-6 py-3 sm:px-10">
-			<a href="#" class="group flex items-center gap-3.5">
+			<a href={homeOf(lang)} class="group flex items-center gap-3.5">
 				<svg viewBox="0 0 100 100" class="h-9 w-9 shrink-0" aria-hidden="true">
 					<rect width="100" height="100" fill="var(--color-anil)"></rect>
 					<path d={STAR} fill="var(--color-cal)"></path>
@@ -62,13 +68,14 @@ const STAR =
 							<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" set:html={icons[s.icon]} />
 						</a>
 					))}
+					<LangSwitch class="ml-1" />
 				</li>
 			</ul>
 
 			<button
 				id="menu-toggle"
 				type="button"
-				aria-label="Toggle menu"
+				aria-label={c.nav.menu}
 				aria-expanded="false"
 				aria-controls="mobile-menu"
 				class="flex h-10 w-10 items-center justify-center md:hidden"
@@ -124,6 +131,7 @@ const STAR =
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" set:html={icons[s.icon]} />
 					</a>
 				))}
+				<LangSwitch class="ml-auto" />
 			</li>
 		</ul>
 	</div>

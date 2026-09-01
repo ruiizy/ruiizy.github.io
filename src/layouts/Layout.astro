@@ -1,32 +1,58 @@
 ---
 import '../styles/global.css';
+import { defaultLang } from '../i18n/ui';
+import { copy, homeOf, otherLang, toLang } from '../i18n/utils';
 
-interface Props {
-	title?: string;
-	description?: string;
-}
+const lang = toLang(Astro.currentLocale);
+const alt = otherLang(lang);
+const c = copy(lang);
 
-const {
-	title = 'Rafael Galvez Ruiz — AI Engineer',
-	description = 'Rafael Galvez Ruiz — AI Engineer in Sevilla. Multi-agent systems with LangGraph, LangChain and MCP.',
-} = Astro.props;
+const abs = (path: string) => new URL(path, Astro.site).href;
 ---
 
-<html lang="en">
+<html lang={lang} data-default-lang={defaultLang} data-alt-lang={alt} data-alt-href={homeOf(alt)}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content={description} />
+		<meta name="description" content={c.meta.description} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#faf6ef" />
+		<link rel="canonical" href={abs(homeOf(lang))} />
+		<link rel="alternate" hreflang="en" href={abs(homeOf('en'))} />
+		<link rel="alternate" hreflang="es" href={abs(homeOf('es'))} />
+		<link rel="alternate" hreflang="x-default" href={abs(homeOf('en'))} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400..600&display=swap"
 			rel="stylesheet"
 		/>
-		<title>{title}</title>
+		<title>{c.meta.title}</title>
+
+		<!--
+			Both languages are built as static pages, so the choice has to be made in
+			the browser — and only on the prefix-less root, which is the one URL that
+			carries no language of its own. A visitor who asked for /es/ gets /es/.
+			A stored choice wins over the system language; redirecting makes the target
+			page the default no longer, so this never bounces twice.
+		-->
+		<script is:inline>
+			(function () {
+				try {
+					var root = document.documentElement;
+					if (root.lang !== root.dataset.defaultLang) return;
+					var want = localStorage.getItem('lang');
+					if (want !== 'en' && want !== 'es') {
+						var system = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+						want = system.toLowerCase().slice(0, 2) === 'es' ? 'es' : 'en';
+					}
+					if (want === root.dataset.altLang) location.replace(root.dataset.altHref + location.hash);
+				} catch (e) {
+					/* private mode, no storage — stay on the page that was asked for */
+				}
+			})();
+		</script>
 	</head>
 	<body class="relative bg-cal font-sans text-tinta antialiased">
 		<!-- Lacería line-work washed over the whole wall, in place of film grain. -->

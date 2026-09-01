@@ -1,24 +1,27 @@
 ---
 import SectionHead from './SectionHead.astro';
 import TilePanel from './TilePanel.astro';
+import { copy, toLang } from '../i18n/utils';
+
+const c = copy(toLang(Astro.currentLocale));
 
 const groups = [
 	{
-		label: 'AI / Agents',
+		label: c.skills.groups.ai,
 		tint: 'bg-anil',
 		soft: 'bg-anil-2/55',
 		text: 'text-anil',
 		items: ['Python', 'LangChain', 'LangGraph', 'MCP', 'Qdrant', 'LlamaIndex'],
 	},
 	{
-		label: 'Frontend',
+		label: c.skills.groups.frontend,
 		tint: 'bg-almagra',
 		soft: 'bg-almagra/35',
 		text: 'text-almagra',
 		items: ['React', 'TypeScript', 'Angular'],
 	},
 	{
-		label: 'Backend',
+		label: c.skills.groups.backend,
 		tint: 'bg-verde',
 		soft: 'bg-verde/35',
 		text: 'text-verde',
@@ -29,7 +32,7 @@ const groups = [
 
 <section id="stack" class="wash relative border-t border-linea px-6 py-16 sm:px-10 sm:py-20">
 	<div class="mx-auto max-w-280">
-		<SectionHead index="03" eyebrow="toolbox" title="Stack" />
+		<SectionHead index="03" eyebrow={c.skills.eyebrow} title={c.skills.title} />
 
 		<div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
 			{groups.map((group) => (

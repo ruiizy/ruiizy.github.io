@@ -1,11 +1,15 @@
 ---
 import { posts } from '../data/posts';
 import SectionHead from './SectionHead.astro';
+import { copy, toLang } from '../i18n/utils';
+
+const lang = toLang(Astro.currentLocale);
+const c = copy(lang);
 ---
 
 <section id="posts" class="relative border-t border-linea px-6 py-16 sm:px-10 sm:py-20">
 	<div class="mx-auto max-w-280">
-		<SectionHead index="05" eyebrow="journal" title="Posts" />
+		<SectionHead index="05" eyebrow={c.posts.eyebrow} title={c.posts.title} />
 
 		<div class="flex flex-col gap-4">
 			{posts.map((post) => (
@@ -20,15 +24,23 @@ import SectionHead from './SectionHead.astro';
 						<span class="font-mono text-[12px] tracking-[0.08em] text-faint uppercase">
 							{post.date}
 						</span>
+						{post.lang !== lang && (
+							<span
+								title={c.posts.otherLanguage}
+								class="border border-linea px-1.5 py-0.5 font-mono text-[10px] tracking-[0.08em] text-faint uppercase"
+							>
+								{post.lang}
+							</span>
+						)}
 					</span>
 
 					<div class="flex flex-col gap-2.5">
 						<h3
 							class="font-display text-xl font-extrabold tracking-[-0.01em] transition-colors duration-200 [font-stretch:92%] group-hover:text-almagra sm:text-[26px]"
 						>
-							{post.title}
+							{post.title[lang]}
 						</h3>
-						<p class="max-w-135 text-[15px] leading-relaxed text-muted">{post.excerpt}</p>
+						<p class="max-w-135 text-[15px] leading-relaxed text-muted">{post.excerpt[lang]}</p>
 					</div>
 
 					<span
