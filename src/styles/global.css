@@ -1,14 +1,32 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Andalusí palette — whitewashed lime wall, azulejo pigments, Mezquita ochre.
+   --junta is the grout the tiles are set into, never a text or border colour.
+   --------------------------------------------------------------------------- */
 @theme {
-	--color-cream: #f7f2e6;
-	--color-ink: #1c1712;
-	--color-accent: #b5502e;
-	--color-line: #e2d9c4;
-	--color-muted: #4a4536;
-	--color-faint: #6b6354;
-	--font-serif: "Instrument Serif", Georgia, serif;
-	--font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+	--color-cal: #faf6ef;
+	--color-cal-2: #f1e9dc;
+	--color-tinta: #17130e;
+	--color-anil: #1d3a80;
+	--color-anil-2: #3a62b6;
+	--color-almagra: #a3382a;
+	--color-albero: #b8842a;
+	--color-verde: #2c6350;
+	--color-linea: #ddd1bd;
+	--color-junta: #dccfb4;
+	--color-muted: #494031;
+	--color-faint: #665b4b;
+
+	--font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+	--font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+	scroll-behavior: smooth;
+	/* Clear the sticky header when jumping to an anchor. */
+	scroll-padding-top: 5.5rem;
 }
 
 body {
@@ -16,9 +34,183 @@ body {
 }
 
 ::selection {
-	background: color-mix(in oklch, var(--color-accent) 35%, transparent);
+	background: color-mix(in oklch, var(--color-anil) 25%, transparent);
 }
 
-.grain {
-	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+/* ---------------------------------------------------------------------------
+   Alicatado de estrella y cruz.
+
+   The plane is cut into two pieces that tile it exactly: the estrella de ocho
+   puntas, and the cruz that closes the gap between four of them. Every piece is
+   a mask, so one geometry serves any colourway and any scale via --tile.
+
+   Each piece is drawn a hair inside its true edge. The gap is the junta, and
+   what shows through it is the layer beneath — the grout bed.
+   --------------------------------------------------------------------------- */
+
+.tile-star,
+.tile-star-alt,
+.tile-cruz,
+.tile-cruz-alt,
+.tile-lace,
+.tile-zellij {
+	--tile: 88px;
+	-webkit-mask-size: var(--tile) var(--tile);
+	mask-size: var(--tile) var(--tile);
+	-webkit-mask-repeat: repeat;
+	mask-repeat: repeat;
+}
+
+.tile-star {
+	-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 17.29L59.58 26.87L73.13 26.87L73.13 40.42L82.71 50L73.13 59.58L73.13 73.13L59.58 73.13L50 82.71L40.42 73.13L26.87 73.13L26.87 59.58L17.29 50L26.87 40.42L26.87 26.87L40.42 26.87ZM0 -32.71L9.58 -23.13L23.13 -23.13L23.13 -9.58L32.71 0L23.13 9.58L23.13 23.13L9.58 23.13L0 32.71L-9.58 23.13L-23.13 23.13L-23.13 9.58L-32.71 0L-23.13 -9.58L-23.13 -23.13L-9.58 -23.13ZM100 -32.71L109.58 -23.13L123.13 -23.13L123.13 -9.58L132.71 0L123.13 9.58L123.13 23.13L109.58 23.13L100 32.71L90.42 23.13L76.87 23.13L76.87 9.58L67.29 0L76.87 -9.58L76.87 -23.13L90.42 -23.13ZM0 67.29L9.58 76.87L23.13 76.87L23.13 90.42L32.71 100L23.13 109.58L23.13 123.13L9.58 123.13L0 132.71L-9.58 123.13L-23.13 123.13L-23.13 109.58L-32.71 100L-23.13 90.42L-23.13 76.87L-9.58 76.87ZM100 67.29L109.58 76.87L123.13 76.87L123.13 90.42L132.71 100L123.13 109.58L123.13 123.13L109.58 123.13L100 132.71L90.42 123.13L76.87 123.13L76.87 109.58L67.29 100L76.87 90.42L76.87 76.87L90.42 76.87Z' fill='black'/></svg>");
+	mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 17.29L59.58 26.87L73.13 26.87L73.13 40.42L82.71 50L73.13 59.58L73.13 73.13L59.58 73.13L50 82.71L40.42 73.13L26.87 73.13L26.87 59.58L17.29 50L26.87 40.42L26.87 26.87L40.42 26.87ZM0 -32.71L9.58 -23.13L23.13 -23.13L23.13 -9.58L32.71 0L23.13 9.58L23.13 23.13L9.58 23.13L0 32.71L-9.58 23.13L-23.13 23.13L-23.13 9.58L-32.71 0L-23.13 -9.58L-23.13 -23.13L-9.58 -23.13ZM100 -32.71L109.58 -23.13L123.13 -23.13L123.13 -9.58L132.71 0L123.13 9.58L123.13 23.13L109.58 23.13L100 32.71L90.42 23.13L76.87 23.13L76.87 9.58L67.29 0L76.87 -9.58L76.87 -23.13L90.42 -23.13ZM0 67.29L9.58 76.87L23.13 76.87L23.13 90.42L32.71 100L23.13 109.58L23.13 123.13L9.58 123.13L0 132.71L-9.58 123.13L-23.13 123.13L-23.13 109.58L-32.71 100L-23.13 90.42L-23.13 76.87L-9.58 76.87ZM100 67.29L109.58 76.87L123.13 76.87L123.13 90.42L132.71 100L123.13 109.58L123.13 123.13L109.58 123.13L100 132.71L90.42 123.13L76.87 123.13L76.87 109.58L67.29 100L76.87 90.42L76.87 76.87L90.42 76.87Z' fill='black'/></svg>");
+}
+
+/* The four corner stars alone, so a second glaze can be set among the first. */
+.tile-star-alt {
+	-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M0 -32.71L9.58 -23.13L23.13 -23.13L23.13 -9.58L32.71 0L23.13 9.58L23.13 23.13L9.58 23.13L0 32.71L-9.58 23.13L-23.13 23.13L-23.13 9.58L-32.71 0L-23.13 -9.58L-23.13 -23.13L-9.58 -23.13ZM100 -32.71L109.58 -23.13L123.13 -23.13L123.13 -9.58L132.71 0L123.13 9.58L123.13 23.13L109.58 23.13L100 32.71L90.42 23.13L76.87 23.13L76.87 9.58L67.29 0L76.87 -9.58L76.87 -23.13L90.42 -23.13ZM0 67.29L9.58 76.87L23.13 76.87L23.13 90.42L32.71 100L23.13 109.58L23.13 123.13L9.58 123.13L0 132.71L-9.58 123.13L-23.13 123.13L-23.13 109.58L-32.71 100L-23.13 90.42L-23.13 76.87L-9.58 76.87ZM100 67.29L109.58 76.87L123.13 76.87L123.13 90.42L132.71 100L123.13 109.58L123.13 123.13L109.58 123.13L100 132.71L90.42 123.13L76.87 123.13L76.87 109.58L67.29 100L76.87 90.42L76.87 76.87L90.42 76.87Z' fill='black'/></svg>");
+	mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M0 -32.71L9.58 -23.13L23.13 -23.13L23.13 -9.58L32.71 0L23.13 9.58L23.13 23.13L9.58 23.13L0 32.71L-9.58 23.13L-23.13 23.13L-23.13 9.58L-32.71 0L-23.13 -9.58L-23.13 -23.13L-9.58 -23.13ZM100 -32.71L109.58 -23.13L123.13 -23.13L123.13 -9.58L132.71 0L123.13 9.58L123.13 23.13L109.58 23.13L100 32.71L90.42 23.13L76.87 23.13L76.87 9.58L67.29 0L76.87 -9.58L76.87 -23.13L90.42 -23.13ZM0 67.29L9.58 76.87L23.13 76.87L23.13 90.42L32.71 100L23.13 109.58L23.13 123.13L9.58 123.13L0 132.71L-9.58 123.13L-23.13 123.13L-23.13 109.58L-32.71 100L-23.13 90.42L-23.13 76.87L-9.58 76.87ZM100 67.29L109.58 76.87L123.13 76.87L123.13 90.42L132.71 100L123.13 109.58L123.13 123.13L109.58 123.13L100 132.71L90.42 123.13L76.87 123.13L76.87 109.58L67.29 100L76.87 90.42L76.87 76.87L90.42 76.87Z' fill='black'/></svg>");
+}
+
+.tile-cruz {
+	-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M-24.97 40.42L-24.97 26.87L-23.13 25.03L-9.58 25.03L0 34.61L9.58 25.03L23.13 25.03L24.97 26.87L24.97 40.42L15.39 50L24.97 59.58L24.97 73.13L23.13 74.97L9.58 74.97L0 65.39L-9.58 74.97L-23.13 74.97L-24.97 73.13L-24.97 59.58L-15.39 50ZM75.03 40.42L75.03 26.87L76.87 25.03L90.42 25.03L100 34.61L109.58 25.03L123.13 25.03L124.97 26.87L124.97 40.42L115.39 50L124.97 59.58L124.97 73.13L123.13 74.97L109.58 74.97L100 65.39L90.42 74.97L76.87 74.97L75.03 73.13L75.03 59.58L84.61 50ZM25.03 -9.58L25.03 -23.13L26.87 -24.97L40.42 -24.97L50 -15.39L59.58 -24.97L73.13 -24.97L74.97 -23.13L74.97 -9.58L65.39 0L74.97 9.58L74.97 23.13L73.13 24.97L59.58 24.97L50 15.39L40.42 24.97L26.87 24.97L25.03 23.13L25.03 9.58L34.61 0ZM25.03 90.42L25.03 76.87L26.87 75.03L40.42 75.03L50 84.61L59.58 75.03L73.13 75.03L74.97 76.87L74.97 90.42L65.39 100L74.97 109.58L74.97 123.13L73.13 124.97L59.58 124.97L50 115.39L40.42 124.97L26.87 124.97L25.03 123.13L25.03 109.58L34.61 100Z' fill='black'/></svg>");
+	mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M-24.97 40.42L-24.97 26.87L-23.13 25.03L-9.58 25.03L0 34.61L9.58 25.03L23.13 25.03L24.97 26.87L24.97 40.42L15.39 50L24.97 59.58L24.97 73.13L23.13 74.97L9.58 74.97L0 65.39L-9.58 74.97L-23.13 74.97L-24.97 73.13L-24.97 59.58L-15.39 50ZM75.03 40.42L75.03 26.87L76.87 25.03L90.42 25.03L100 34.61L109.58 25.03L123.13 25.03L124.97 26.87L124.97 40.42L115.39 50L124.97 59.58L124.97 73.13L123.13 74.97L109.58 74.97L100 65.39L90.42 74.97L76.87 74.97L75.03 73.13L75.03 59.58L84.61 50ZM25.03 -9.58L25.03 -23.13L26.87 -24.97L40.42 -24.97L50 -15.39L59.58 -24.97L73.13 -24.97L74.97 -23.13L74.97 -9.58L65.39 0L74.97 9.58L74.97 23.13L73.13 24.97L59.58 24.97L50 15.39L40.42 24.97L26.87 24.97L25.03 23.13L25.03 9.58L34.61 0ZM25.03 90.42L25.03 76.87L26.87 75.03L40.42 75.03L50 84.61L59.58 75.03L73.13 75.03L74.97 76.87L74.97 90.42L65.39 100L74.97 109.58L74.97 123.13L73.13 124.97L59.58 124.97L50 115.39L40.42 124.97L26.87 124.97L25.03 123.13L25.03 109.58L34.61 100Z' fill='black'/></svg>");
+}
+
+/* One of the two cruz courses, for a chequer of two glazes. */
+.tile-cruz-alt {
+	-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M25.03 -9.58L25.03 -23.13L26.87 -24.97L40.42 -24.97L50 -15.39L59.58 -24.97L73.13 -24.97L74.97 -23.13L74.97 -9.58L65.39 0L74.97 9.58L74.97 23.13L73.13 24.97L59.58 24.97L50 15.39L40.42 24.97L26.87 24.97L25.03 23.13L25.03 9.58L34.61 0ZM25.03 90.42L25.03 76.87L26.87 75.03L40.42 75.03L50 84.61L59.58 75.03L73.13 75.03L74.97 76.87L74.97 90.42L65.39 100L74.97 109.58L74.97 123.13L73.13 124.97L59.58 124.97L50 115.39L40.42 124.97L26.87 124.97L25.03 123.13L25.03 109.58L34.61 100Z' fill='black'/></svg>");
+	mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M25.03 -9.58L25.03 -23.13L26.87 -24.97L40.42 -24.97L50 -15.39L59.58 -24.97L73.13 -24.97L74.97 -23.13L74.97 -9.58L65.39 0L74.97 9.58L74.97 23.13L73.13 24.97L59.58 24.97L50 15.39L40.42 24.97L26.87 24.97L25.03 23.13L25.03 9.58L34.61 0ZM25.03 90.42L25.03 76.87L26.87 75.03L40.42 75.03L50 84.61L59.58 75.03L73.13 75.03L74.97 76.87L74.97 90.42L65.39 100L74.97 109.58L74.97 123.13L73.13 124.97L59.58 124.97L50 115.39L40.42 124.97L26.87 124.97L25.03 123.13L25.03 109.58L34.61 100Z' fill='black'/></svg>");
+}
+
+/*
+ * Set: a cut piece stands a touch proud of its junta — lit along the top-left
+ * lip, dropping a warm shadow into the grout below. Applied to the piece layer,
+ * the filter follows the mask, so every star and cruz is shaded individually.
+ */
+.tile-set {
+	filter:
+		drop-shadow(-0.5px -0.5px 0 rgb(255 255 255 / 0.55))
+		drop-shadow(0.5px 1px 1.5px rgb(23 19 14 / 0.38));
+}
+
+/*
+ * Fired: no two tiles come out of the kiln the same. Three blooms, each far
+ * wider than a tile and sharing no factor with the grid, so the tone is flat
+ * across any one piece but drifts from piece to piece over the field.
+ */
+.tile-fired {
+	background-image:
+		radial-gradient(58% 52% at 30% 24%, rgb(255 255 255 / 0.11), rgb(255 255 255 / 0) 70%),
+		radial-gradient(52% 58% at 74% 76%, rgb(23 19 14 / 0.08), rgb(23 19 14 / 0) 72%),
+		radial-gradient(46% 50% at 62% 34%, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0) 74%);
+	background-size:
+		389px 331px,
+		293px 251px,
+		211px 179px;
+	background-position:
+		0 0,
+		97px 41px,
+		163px 113px;
+}
+
+/* Lacería: the same star drawn as interlace line-work rather than solid fill. */
+.tile-lace {
+	--tile: 96px;
+	-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='none' stroke='black' stroke-width='3'><path d='M50 16L59.96 25.96L74.04 25.96L74.04 40.04L84 50L74.04 59.96L74.04 74.04L59.96 74.04L50 84L40.04 74.04L25.96 74.04L25.96 59.96L16 50L25.96 40.04L25.96 25.96L40.04 25.96Z'/><path d='M0 0L25.96 25.96M100 0L74.04 25.96M0 100L25.96 74.04M100 100L74.04 74.04'/><path d='M50 0L50 16M50 84L50 100M0 50L16 50M84 50L100 50'/></g></svg>");
+	mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='none' stroke='black' stroke-width='3'><path d='M50 16L59.96 25.96L74.04 25.96L74.04 40.04L84 50L74.04 59.96L74.04 74.04L59.96 74.04L50 84L40.04 74.04L25.96 74.04L25.96 59.96L16 50L25.96 40.04L25.96 25.96L40.04 25.96Z'/><path d='M0 0L25.96 25.96M100 0L74.04 25.96M0 100L25.96 74.04M100 100L74.04 74.04'/><path d='M50 0L50 16M50 84L50 100M0 50L16 50M84 50L100 50'/></g></svg>");
+}
+
+/*
+ * Alicatado de rombos: a course of lozenges set point-to-point, the tile
+ * cutter's simplest repeat. Same centre + corners layout as the star.
+ */
+.tile-zellij {
+	--tile: 32px;
+	-webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 15L85 50L50 85L15 50Z M0 -35L35 0L0 35L-35 0Z M100 -35L135 0L100 35L65 0Z M0 65L35 100L0 135L-35 100Z M100 65L135 100L100 135L65 100Z' fill='black'/></svg>");
+	mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 15L85 50L50 85L15 50Z M0 -35L35 0L0 35L-35 0Z M100 -35L135 0L100 35L65 0Z M0 65L35 100L0 135L-35 100Z M100 65L135 100L100 135L65 100Z' fill='black'/></svg>");
+}
+
+/*
+ * Cenefa: a single course of alicatado rombos — almagra cut into anil, each
+ * piece ringed in cal so the course reads as set tile rather than a stripe.
+ * Used as the rule between sections instead of a hairline border.
+ */
+.cenefa {
+	--tile: 18px;
+	background-color: var(--color-anil);
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 15L85 50L50 85L15 50Z M0 -35L35 0L0 35L-35 0Z M100 -35L135 0L100 35L65 0Z M0 65L35 100L0 135L-35 100Z M100 65L135 100L100 135L65 100Z' fill='%23faf6ef'/><path d='M50 26L74 50L50 74L26 50Z M0 -24L24 0L0 24L-24 0Z M100 -24L124 0L100 24L76 0Z M0 76L24 100L0 124L-24 100Z M100 76L124 100L100 124L76 100Z' fill='%23a3382a'/></svg>");
+	background-size: var(--tile) var(--tile);
+}
+
+/* Section headings sit on a lime-wash block rather than floating on the page. */
+.wash {
+	background-image: linear-gradient(
+		to bottom,
+		var(--color-cal-2) 0%,
+		var(--color-cal) 100%
+	);
+}
+
+/*
+ * Glaze: the sheen on fired ceramic. Sits over a tile field as its own layer so
+ * the light reads as coming from one direction across the whole panel. Kept
+ * faint — at section scale a strong sheen reads as a light leak, not as glass,
+ * and the per-piece tone drift in .tile-fired already carries most of it.
+ */
+.glaze {
+	background-image:
+		linear-gradient(
+			148deg,
+			rgb(255 255 255 / 0.1) 0%,
+			rgb(255 255 255 / 0.03) 28%,
+			rgb(255 255 255 / 0) 52%,
+			rgb(23 19 14 / 0.05) 100%
+		);
+}
+
+/*
+ * Panel: a set tile catches a highlight along its top edge and drops a warm
+ * shadow into the wall, never a grey one.
+ */
+.panel {
+	box-shadow:
+		inset 0 1px 0 rgb(255 255 255 / 0.75),
+		0 1px 2px rgb(58 40 18 / 0.06),
+		0 14px 28px -18px rgb(58 40 18 / 0.45);
+}
+
+.panel-lift {
+	transition:
+		transform 0.25s cubic-bezier(0.2, 0.7, 0.3, 1),
+		box-shadow 0.25s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.panel-lift:hover {
+	transform: translateY(-3px);
+	box-shadow:
+		inset 0 1px 0 rgb(255 255 255 / 0.85),
+		0 2px 4px rgb(58 40 18 / 0.08),
+		0 22px 40px -20px rgb(58 40 18 / 0.55);
+}
+
+/* A hairline pair either side of a cenefa, the way a real tile border is set. */
+.junquillo {
+	box-shadow:
+		inset 0 1px 0 rgb(23 19 14 / 0.25),
+		inset 0 -1px 0 rgb(23 19 14 / 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
 }

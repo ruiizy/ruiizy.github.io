@@ -1,0 +1,61 @@
+---
+/**
+ * A field of alicatado. The plane is cut into two shapes that tile it exactly —
+ * estrella and cruz — set on a bed of grout, then glazed and lit from one
+ * direction so the panel reads as one fired surface rather than a pattern.
+ *
+ * `starAlt` and `crossAlt` take a second glaze for one course of that shape,
+ * which is how a real panel gets its colour without a bigger repeat. Leave them
+ * unset and the field stays one glaze per shape.
+ *
+ * The root is always `relative` — to bleed a field across a section, wrap this
+ * in your own absolutely-positioned box rather than passing `absolute` in,
+ * which would collide with the root's own position utility.
+ */
+interface Props {
+	/** The grout bed: what shows through the junta between pieces. */
+	ground?: string;
+	star?: string;
+	/** Second glaze, set into the corner stars only. */
+	starAlt?: string | null;
+	cross?: string | null;
+	/** Second glaze, set into one of the two cruz courses only. */
+	crossAlt?: string | null;
+	lace?: string | null;
+	tile?: number;
+	laceOpacity?: string;
+	/** Bevel and kiln mottle. Drop it for fields too faint to carry them. */
+	relief?: boolean;
+	/** Glaze darkens as it falls; only worth it over a saturated ground. */
+	glaze?: boolean;
+	class?: string;
+}
+
+const {
+	ground = 'bg-junta',
+	star = 'bg-anil',
+	starAlt = null,
+	cross = 'bg-cal',
+	crossAlt = null,
+	lace = null,
+	tile = 96,
+	laceOpacity = 'opacity-70',
+	relief = true,
+	glaze = true,
+	class: className = '',
+} = Astro.props;
+
+const scale = `--tile: ${tile}px`;
+const piece = relief ? 'tile-set tile-fired' : '';
+---
+
+<div class={`relative overflow-hidden ${className}`} aria-hidden="true">
+	<div class={`absolute inset-0 ${ground}`}></div>
+	{cross && <div class={`tile-cruz absolute inset-0 ${piece} ${cross}`} style={scale} />}
+	{crossAlt && <div class={`tile-cruz-alt absolute inset-0 ${piece} ${crossAlt}`} style={scale} />}
+	<div class={`tile-star absolute inset-0 ${piece} ${star}`} style={scale}></div>
+	{starAlt && <div class={`tile-star-alt absolute inset-0 ${piece} ${starAlt}`} style={scale} />}
+	{lace && <div class={`tile-lace absolute inset-0 ${lace} ${laceOpacity}`} style={scale} />}
+	{glaze && <div class="glaze absolute inset-0"></div>}
+	<slot />
+</div>

@@ -1,43 +1,37 @@
-# Astro Starter Kit: Minimal
+# ruiizy.github.io
 
-```sh
-bun create astro@latest -- --template minimal
-```
+Personal site of Rafael Galvez Ruiz — AI Engineer, Sevilla. Astro 7 + Tailwind 4,
+static, deployed to GitHub Pages by `.github/workflows/deploy.yml`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Design system
 
-## 🚀 Project Structure
+The visual language is Andalusí tilework, drawn entirely in CSS — no images.
+Every motif in `src/styles/global.css` is an SVG **mask**, so one shape can be
+tinted with `background-color` and rescaled through the `--tile` custom property:
 
-Inside of your Astro project, you'll see the following folders and files:
+| Class | Motif |
+| :--- | :--- |
+| `.tile-star` | Estrella de ocho puntas — two overlapping squares, tiled centre + corners |
+| `.tile-lace` | The same star as lacería line-work; used as the page's wall texture |
+| `.tile-zellij` | Alicatado de rombos — a course of lozenges set point-to-point |
+| `.cenefa` | Tile border, almagra on añil; the rule between sections |
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Palette: `cal` (lime wash), `tinta`, `anil`, `almagra`, `albero`, `verde`.
+Type: Archivo for display and body, JetBrains Mono for labels and metadata.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Two constraints worth keeping:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **`albero` never carries body text** — it is 3.06:1 on `cal`, decoration only.
+- **`anil` never sits on `tinta`** — 1.73:1. On dark grounds the accent is `albero`.
 
-Any static assets, like images, can be placed in the `public/` directory.
+Content is English; the site's own voice (nav, CTAs, headings like *Hablamos*)
+is Spanish.
 
-## 🧞 Commands
+## Commands
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command | Action |
+| :--- | :--- |
+| `bun install` | Install dependencies |
+| `bun dev` | Dev server at `localhost:4321` |
+| `bun run build` | Build to `./dist/` |
+| `bun preview` | Preview the build |

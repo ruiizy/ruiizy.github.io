@@ -1,36 +1,53 @@
 ---
 import { posts } from '../data/posts';
+import SectionHead from './SectionHead.astro';
 ---
 
-<section id="posts" class="relative overflow-hidden border-t border-line px-8 py-16 sm:py-18">
-	<span
-		class="ghost-num pointer-events-none absolute -top-5 -left-2 -z-10 select-none font-serif text-[200px] leading-none italic text-transparent opacity-10 [-webkit-text-stroke:1px_currentColor]"
-	>
-		05
-	</span>
-	<div class="relative mx-auto max-w-270">
-		<p class="js-reveal mb-2 text-[13px] font-semibold tracking-[0.14em] text-accent uppercase">Journal</p>
-		<h2 class="js-reveal mb-9 font-serif text-4xl font-normal italic">Posts</h2>
-		<div class="flex flex-col">
+<section id="posts" class="relative border-t border-linea px-6 py-16 sm:px-10 sm:py-20">
+	<div class="mx-auto max-w-280">
+		<SectionHead index="05" eyebrow="journal" title="Posts" />
+
+		<div class="flex flex-col gap-4">
 			{posts.map((post) => (
 				<a
 					href={post.link ?? '#'}
-					class="js-reveal group flex flex-col gap-2 border-b border-line py-6.5 sm:grid sm:grid-cols-[140px_1fr_auto] sm:items-start sm:gap-6"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="js-reveal panel panel-lift group grid grid-cols-1 gap-4 border border-linea bg-cal p-6 sm:grid-cols-[140px_1fr_44px] sm:items-start sm:gap-8 sm:p-7"
 				>
-					<div class="flex items-center justify-between sm:contents">
-						<span class="text-[13px] font-semibold tracking-wide text-faint uppercase sm:pt-1.5">{post.date}</span>
-						<span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-current transition-colors duration-200 group-hover:border-accent group-hover:bg-accent sm:order-3 sm:mt-1.5">
-							<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-200 group-hover:stroke-cream">
-								<path d="M7 17L17 7" /><path d="M7 7h10v10" />
-							</svg>
+					<span class="flex items-center gap-2.5 sm:pt-1.5">
+						<span class="h-2 w-2 shrink-0 rotate-45 bg-almagra" aria-hidden="true"></span>
+						<span class="font-mono text-[12px] tracking-[0.08em] text-faint uppercase">
+							{post.date}
 						</span>
-					</div>
-					<div class="flex flex-col gap-2">
-						<h3 class="font-serif text-2xl font-normal transition-colors duration-200 group-hover:text-accent">
+					</span>
+
+					<div class="flex flex-col gap-2.5">
+						<h3
+							class="font-display text-xl font-extrabold tracking-[-0.01em] transition-colors duration-200 [font-stretch:92%] group-hover:text-almagra sm:text-[26px]"
+						>
 							{post.title}
 						</h3>
-						<p class="max-w-120 text-sm leading-relaxed text-ink/70">{post.excerpt}</p>
+						<p class="max-w-135 text-[15px] leading-relaxed text-muted">{post.excerpt}</p>
 					</div>
+
+					<span
+						class="flex h-10 w-10 items-center justify-center border border-linea text-muted transition-colors duration-200 group-hover:border-almagra group-hover:bg-almagra group-hover:text-cal sm:mt-1"
+					>
+						<svg
+							width="13"
+							height="13"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M7 17L17 7"></path>
+							<path d="M7 7h10v10"></path>
+						</svg>
+					</span>
 				</a>
 			))}
 		</div>

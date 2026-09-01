@@ -1,38 +1,68 @@
 ---
+import SectionHead from './SectionHead.astro';
+import TilePanel from './TilePanel.astro';
+
 const groups = [
 	{
 		label: 'AI / Agents',
+		tint: 'bg-anil',
+		soft: 'bg-anil-2/55',
+		text: 'text-anil',
 		items: ['Python', 'LangChain', 'LangGraph', 'MCP', 'Qdrant', 'LlamaIndex'],
 	},
 	{
 		label: 'Frontend',
+		tint: 'bg-almagra',
+		soft: 'bg-almagra/35',
+		text: 'text-almagra',
 		items: ['React', 'TypeScript', 'Angular'],
 	},
 	{
 		label: 'Backend',
+		tint: 'bg-verde',
+		soft: 'bg-verde/35',
+		text: 'text-verde',
 		items: ['Java', 'Spring Boot'],
 	},
 ];
 ---
 
-<section class="relative overflow-hidden border-t border-line px-8 py-16 sm:py-18">
-	<span
-		class="ghost-num pointer-events-none absolute -top-5 -right-2 -z-10 select-none font-serif text-[200px] leading-none italic text-transparent opacity-10 [-webkit-text-stroke:1px_currentColor]"
-	>
-		03
-	</span>
-	<div class="relative mx-auto max-w-270">
-		<p class="js-reveal mb-2 text-[13px] font-semibold tracking-[0.14em] text-accent uppercase">Toolbox</p>
-		<h2 class="js-reveal mb-9 font-serif text-4xl font-normal italic">Stack</h2>
-		<div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+<section id="stack" class="wash relative border-t border-linea px-6 py-16 sm:px-10 sm:py-20">
+	<div class="mx-auto max-w-280">
+		<SectionHead index="03" eyebrow="toolbox" title="Stack" />
+
+		<div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
 			{groups.map((group) => (
-				<div class="js-reveal">
-					<p class="mb-3 text-[13px] font-semibold tracking-[0.14em] text-faint uppercase">{group.label}</p>
-					<ul class="flex flex-col gap-1.5">
-						{group.items.map((item) => (
-							<li class="font-serif text-xl italic text-muted">{item}</li>
-						))}
-					</ul>
+				<div class="js-reveal panel panel-lift flex flex-col border border-linea bg-cal">
+					<div
+						class={`tile-zellij junquillo h-9 shrink-0 ${group.tint}`}
+						style="--tile: 36px"
+						aria-hidden="true"
+					></div>
+
+					<div class="px-5 pt-5 pb-4">
+						<p class={`font-mono text-[11.5px] tracking-[0.12em] uppercase ${group.text}`}>
+							{group.label}
+						</p>
+						<ul class="mt-4 flex flex-col">
+							{group.items.map((item) => (
+								<li class="flex items-center gap-3 border-b border-linea py-2.5 last:border-b-0">
+									<span class={`h-2 w-2 shrink-0 rotate-45 ${group.tint}`} aria-hidden="true"></span>
+									<span class="text-[15px] font-semibold text-tinta">{item}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					<!-- Dead space at the foot of a short list becomes wall, not a void. -->
+					<TilePanel
+						class="mt-auto h-24 border-t border-linea"
+						ground="bg-cal-2"
+						star={group.soft}
+						cross="bg-cal"
+						glaze={false}
+						tile={44}
+					/>
 				</div>
 			))}
 		</div>

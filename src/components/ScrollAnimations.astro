@@ -2,47 +2,55 @@
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-	gsap.registerPlugin(ScrollTrigger);
+	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-	tl.from('.js-hero-eyebrow', { opacity: 0, y: 12, duration: 0.5 })
-		.from('.js-hero-line1', { opacity: 0, y: 40, duration: 0.75 }, '-=0.2')
-		.from('.js-hero-line2', { opacity: 0, y: 40, duration: 0.75 }, '-=0.55')
-		.from('.js-hero-role', { opacity: 0, y: 16, duration: 0.5 }, '-=0.35')
-		.from('.js-hero-quote', { opacity: 0, y: 16, duration: 0.5 }, '-=0.3')
-		.from('.js-hero-cta', { opacity: 0, y: 16, duration: 0.5 }, '-=0.25');
+	if (!reduced) {
+		gsap.registerPlugin(ScrollTrigger);
 
-	gsap.to('.js-spark', { rotation: 360, duration: 9, repeat: -1, ease: 'none', transformOrigin: '50% 50%' });
+		const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+		tl.from('.js-hero-eyebrow', { opacity: 0, x: -16, duration: 0.5 })
+			.from('.js-hero-line1', { opacity: 0, y: 40, duration: 0.75 }, '-=0.2')
+			.from('.js-hero-line2', { opacity: 0, y: 40, duration: 0.75 }, '-=0.55')
+			.from('.js-hero-role', { opacity: 0, y: 16, duration: 0.5 }, '-=0.35')
+			.from('.js-hero-quote', { opacity: 0, y: 16, duration: 0.5 }, '-=0.3')
+			.from('.js-hero-cta', { opacity: 0, y: 16, duration: 0.5 }, '-=0.25');
 
-	gsap.utils.toArray<HTMLElement>('.ghost-num').forEach((el) => {
-		gsap.to(el, {
-			y: -50,
-			ease: 'none',
-			scrollTrigger: {
-				trigger: el.closest('section') ?? el,
-				start: 'top bottom',
-				end: 'bottom top',
-				scrub: 0.6,
-			},
+		// Azulejo panels drift against the scroll, like a wall passing behind a window.
+		gsap.utils.toArray<HTMLElement>('.js-parallax').forEach((el) => {
+			gsap.to(el, {
+				y: -40,
+				ease: 'none',
+				scrollTrigger: {
+					trigger: el.closest('section') ?? el,
+					start: 'top bottom',
+					end: 'bottom top',
+					scrub: 0.6,
+				},
+			});
 		});
-	});
 
-	gsap.utils.toArray<HTMLElement>('.js-reveal').forEach((el) => {
-		gsap.from(el, {
+		gsap.utils.toArray<HTMLElement>('.js-reveal').forEach((el) => {
+			gsap.from(el, {
+				opacity: 0,
+				y: 24,
+				duration: 0.7,
+				ease: 'power2.out',
+				scrollTrigger: { trigger: el, start: 'top 85%' },
+			});
+		});
+
+		gsap.from('.js-crop', {
 			opacity: 0,
-			y: 28,
-			duration: 0.7,
-			ease: 'power2.out',
-			scrollTrigger: { trigger: el, start: 'top 85%' },
+			scale: 0.5,
+			duration: 0.45,
+			stagger: 0.07,
+			ease: 'back.out(2)',
+			scrollTrigger: { trigger: '#contact', start: 'top 75%' },
 		});
-	});
 
-	gsap.from('.js-crop', {
-		opacity: 0,
-		scale: 0.4,
-		duration: 0.4,
-		stagger: 0.08,
-		ease: 'back.out(2)',
-		scrollTrigger: { trigger: '#contact', start: 'top 75%' },
-	});
+		// Display swaps reflow the page after triggers are measured; remeasure once
+		// the webfonts land so nothing is left stuck at opacity 0.
+		document.fonts?.ready.then(() => ScrollTrigger.refresh());
+		window.addEventListener('load', () => ScrollTrigger.refresh());
+	}
 </script>

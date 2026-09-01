@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-    <circle cx="64" cy="64" r="64" fill="#1c1712" />
-    <text x="64" y="66" text-anchor="middle" dominant-baseline="central"
-        font-family="system-ui, -apple-system, 'Work Sans', sans-serif" font-weight="700"
-        font-size="50" letter-spacing="-1" fill="#f7f2e6">RG</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#1d3a80" />
+    <path
+        d="M50 16L59.96 25.96L74.04 25.96L74.04 40.04L84 50L74.04 59.96L74.04 74.04L59.96 74.04L50 84L40.04 74.04L25.96 74.04L25.96 59.96L16 50L25.96 40.04L25.96 25.96L40.04 25.96Z"
+        fill="#faf6ef" />
 </svg>

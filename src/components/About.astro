@@ -1,16 +1,68 @@
-<section id="about" class="relative overflow-hidden border-t border-line px-8 py-16 sm:py-18">
-	<span
-		class="ghost-num pointer-events-none absolute -top-5 -left-2 -z-10 select-none font-serif text-[200px] leading-none italic text-transparent opacity-10 [-webkit-text-stroke:1px_currentColor]"
-	>
-		02
-	</span>
-	<div class="relative mx-auto grid max-w-270 grid-cols-1 gap-10 sm:grid-cols-[220px_1fr]">
-		<div class="js-reveal">
-			<p class="mb-2 text-[13px] font-semibold tracking-[0.14em] text-accent uppercase">Profile</p>
-			<h2 class="font-serif text-4xl font-normal italic">About</h2>
+---
+import SectionHead from './SectionHead.astro';
+import TilePanel from './TilePanel.astro';
+
+// Drawn strictly from the prose below — no dates, because none are claimed there.
+const track = [
+	{
+		when: 'now',
+		where: 'CaixaBank · AI Innovation',
+		what: 'Stateful multi-agent workflows',
+		tint: 'bg-anil',
+	},
+	{ when: 'before', where: 'NTT DATA · Softtek', what: 'Frontend, four years', tint: 'bg-almagra' },
+	{
+		when: 'study',
+		where: 'Universitat Oberta de Catalunya',
+		what: 'In progress',
+		tint: 'bg-verde',
+	},
+];
+---
+
+<section id="about" class="relative px-6 py-16 sm:px-10 sm:py-20">
+	<div class="mx-auto max-w-280">
+		<SectionHead index="02" eyebrow="profile" title="About" />
+
+		<div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_340px] lg:gap-16">
+			<div class="js-reveal max-w-160">
+				<p class="border-l-2 border-almagra pl-5 text-lg leading-relaxed text-tinta sm:text-xl">
+					Currently at CaixaBank's AI Innovation team, I design stateful multi-agent workflows using
+					LangGraph, LangChain and Qdrant — turning complex PoCs into enterprise-ready products.
+				</p>
+				<p class="mt-6 pl-5 text-base leading-relaxed text-muted">
+					I standardize LLM communication across services with the Model Context Protocol (MCP),
+					integrating GPT, Claude and local models into scalable backend pipelines. Before that, four
+					years as a frontend developer (React, Angular) at NTT DATA and Softtek. Studying at
+					Universitat Oberta de Catalunya.
+				</p>
+			</div>
+
+			<div class="js-reveal panel flex flex-col border border-linea bg-cal">
+				<div class="cenefa junquillo h-4.5 shrink-0" aria-hidden="true"></div>
+				<ul class="px-5 py-2">
+					{track.map((t) => (
+						<li class="border-b border-linea py-4 last:border-b-0">
+							<span class="flex items-center gap-2.5">
+								<span class={`h-2 w-2 shrink-0 rotate-45 ${t.tint}`} aria-hidden="true"></span>
+								<span class="font-mono text-[11px] tracking-[0.1em] text-faint uppercase">
+									{t.when}
+								</span>
+							</span>
+							<p class="mt-1.5 text-[15px] font-semibold text-tinta">{t.where}</p>
+							<p class="mt-0.5 font-mono text-[12.5px] text-faint">{t.what}</p>
+						</li>
+					))}
+				</ul>
+				<TilePanel
+					class="mt-auto h-20 border-t border-linea"
+					ground="bg-cal-2"
+					star="bg-anil/35"
+					cross="bg-cal"
+					glaze={false}
+					tile={44}
+				/>
+			</div>
 		</div>
-		<p class="js-reveal max-w-155 font-sans text-base leading-relaxed text-ink/80 sm:text-lg">
-			Currently at CaixaBank's AI Innovation team, I design stateful multi-agent workflows using LangGraph, LangChain and Qdrant — turning complex PoCs into enterprise-ready products. I standardize LLM communication across services with the Model Context Protocol (MCP), integrating GPT, Claude and local models into scalable backend pipelines. Before that, four years as a frontend developer (React, Angular) at NTT DATA and Softtek. Studying at Universitat Oberta de Catalunya.
-		</p>
 	</div>
 </section>

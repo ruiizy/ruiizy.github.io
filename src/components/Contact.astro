@@ -1,22 +1,90 @@
-<section id="contact" class="relative overflow-hidden px-8 py-24">
-	<span
-		class="ghost-num pointer-events-none absolute -bottom-10 -left-2 -z-10 select-none font-serif text-[200px] leading-none italic text-transparent opacity-10 [-webkit-text-stroke:1px_currentColor]"
-	>
-		06
-	</span>
-	<div class="relative mx-auto max-w-155 border border-line p-7 sm:p-12">
-		<span class="js-crop absolute -top-px -left-px h-4 w-4 border-t border-l border-ink/35"></span>
-		<span class="js-crop absolute -top-px -right-px h-4 w-4 border-t border-r border-ink/35"></span>
-		<span class="js-crop absolute -bottom-px -left-px h-4 w-4 border-b border-l border-ink/35"></span>
-		<span class="js-crop absolute -right-px -bottom-px h-4 w-4 border-r border-b border-ink/35"></span>
+---
+import TilePanel from './TilePanel.astro';
 
-		<p class="js-reveal mb-3 text-[13px] font-semibold tracking-[0.14em] text-accent uppercase">Contact</p>
-		<h2 class="js-reveal mb-7 font-serif text-4xl leading-[1.02] font-normal italic sm:text-5xl">Let's talk</h2>
-		<a
-			href="mailto:ruizgalvezrafael@gmail.com"
-			class="js-reveal relative inline-block text-base font-semibold break-all after:absolute after:inset-x-0 after:-bottom-1.5 after:h-0.5 after:origin-left after:scale-x-[0.05] after:bg-accent after:transition-transform after:duration-300 hover:after:scale-x-100 sm:text-xl sm:break-normal"
-		>
-			ruizgalvezrafael@gmail.com
-		</a>
+const email = 'ruizgalvezrafael@gmail.com';
+
+const STAR =
+	'M50 16L59.96 25.96L74.04 25.96L74.04 40.04L84 50L74.04 59.96L74.04 74.04L59.96 74.04L50 84L40.04 74.04L25.96 74.04L25.96 59.96L16 50L25.96 40.04L25.96 25.96L40.04 25.96Z';
+
+// A tile-maker's sample board: nine tiles, each glaze set against its neighbour.
+const board = [
+	{ g: 'var(--color-anil)', s: 'var(--color-cal)' },
+	{ g: 'var(--color-cal)', s: 'var(--color-almagra)' },
+	{ g: 'var(--color-almagra)', s: 'var(--color-cal)' },
+	{ g: 'var(--color-cal)', s: 'var(--color-verde)' },
+	{ g: 'var(--color-albero)', s: 'var(--color-tinta)' },
+	{ g: 'var(--color-cal)', s: 'var(--color-anil)' },
+	{ g: 'var(--color-verde)', s: 'var(--color-cal)' },
+	{ g: 'var(--color-cal)', s: 'var(--color-albero)' },
+	{ g: 'var(--color-anil)', s: 'var(--color-cal)' },
+];
+---
+
+<section id="contact" class="relative overflow-hidden bg-anil text-cal">
+	<div class="absolute inset-0">
+		<TilePanel
+			class="h-full w-full"
+			ground="bg-anil"
+			star="bg-anil-2/55"
+			starAlt="bg-cal/12"
+			cross="bg-cal/8"
+			glaze={false}
+			tile={118}
+		/>
+		<div class="absolute inset-0 bg-gradient-to-r from-anil via-anil/90 to-anil/40 lg:to-transparent"></div>
+	</div>
+
+	<div class="relative mx-auto max-w-280 px-6 py-20 sm:px-10 sm:py-24">
+		<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-20">
+			<div>
+				<div
+					class="js-reveal mb-5 flex items-center gap-3.5 font-mono text-[12px] tracking-[0.1em] text-cal/85 uppercase"
+				>
+					<span class="h-px w-10 bg-albero"></span>
+					06 / contact
+				</div>
+
+				<h2
+					class="js-reveal font-display text-[clamp(2.75rem,9vw,6rem)] leading-[0.85] font-black tracking-[-0.03em] uppercase [font-stretch:85%]"
+				>
+					Hablamos
+				</h2>
+
+				<p class="js-reveal mt-6 max-w-110 text-[15px] leading-relaxed text-cal/85 sm:text-base">
+					Agentes, MCP, arquitectura frontend — o simplemente para saludar.
+				</p>
+
+				<a
+					href={`mailto:${email}`}
+					class="js-reveal panel group mt-9 inline-flex w-full max-w-125 items-center justify-between gap-4 border border-cal/45 bg-tinta/25 px-5 py-4 font-mono text-[13px] transition-colors duration-200 hover:border-albero hover:bg-albero hover:text-tinta sm:text-[15px]"
+				>
+					<span class="break-all">{email}</span>
+					<svg
+						width="17"
+						height="17"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+					>
+						<path d="M5 12h14"></path>
+						<path d="M13 6l6 6-6 6"></path>
+					</svg>
+				</a>
+			</div>
+
+			<!-- A tile-maker's sample board, laid on its grout bed. -->
+			<div class="grid w-fit grid-cols-3 gap-1.5 bg-tinta/25 p-1.5" aria-hidden="true">
+				{board.map((t) => (
+					<svg viewBox="0 0 100 100" class="js-crop panel h-16 w-16 sm:h-20 sm:w-20">
+						<rect width="100" height="100" fill={t.g}></rect>
+						<path d={STAR} fill={t.s}></path>
+					</svg>
+				))}
+			</div>
+		</div>
 	</div>
 </section>

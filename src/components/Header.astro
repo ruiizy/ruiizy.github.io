@@ -1,90 +1,132 @@
 ---
 const links = [
-	{ href: '#about', label: 'About' },
-	{ href: '#projects', label: 'Work' },
-	{ href: '#posts', label: 'Posts' },
-	{ href: '#contact', label: 'Contact' },
+	{ href: '#about', label: 'about' },
+	{ href: '#stack', label: 'stack' },
+	{ href: '#projects', label: 'work' },
+	{ href: '#posts', label: 'posts' },
+	{ href: '#contact', label: 'contact' },
 ];
+
+const icons = {
+	github:
+		'<path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.071 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.833.091-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.678.921.678 1.856 0 1.34-.012 2.421-.012 2.75 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/>',
+	linkedin:
+		'<path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-3.96 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48Z"/>',
+} as const;
 
 const social = [
 	{ href: 'https://github.com/ruiizy', label: 'GitHub', icon: 'github' },
 	{ href: 'https://www.linkedin.com/in/rgrz/', label: 'LinkedIn', icon: 'linkedin' },
 ] as const;
+
+const STAR =
+	'M50 16L59.96 25.96L74.04 25.96L74.04 40.04L84 50L74.04 59.96L74.04 74.04L59.96 74.04L50 84L40.04 74.04L25.96 74.04L25.96 59.96L16 50L25.96 40.04L25.96 25.96L40.04 25.96Z';
 ---
 
-<header class="sticky top-0 z-20 border-b border-line bg-cream/85 backdrop-blur">
-	<nav class="mx-auto flex max-w-270 items-center justify-between px-6 py-3.5 sm:px-8 sm:py-4.5">
-		<a href="#" class="flex items-center gap-3">
-			<span
-				class="flex h-10 w-10 items-center justify-center rounded-full bg-ink font-sans text-[13px] font-bold tracking-wide text-cream"
+<header class="sticky top-0 z-30">
+	<div class="cenefa junquillo h-4.5" aria-hidden="true"></div>
+	<div class="border-b border-linea bg-cal/90 backdrop-blur-sm">
+		<nav class="mx-auto flex max-w-280 items-center justify-between px-6 py-3 sm:px-10">
+			<a href="#" class="group flex items-center gap-3.5">
+				<svg viewBox="0 0 100 100" class="h-9 w-9 shrink-0" aria-hidden="true">
+					<rect width="100" height="100" fill="var(--color-anil)"></rect>
+					<path d={STAR} fill="var(--color-cal)"></path>
+				</svg>
+				<span
+					class="font-display text-[15px] font-extrabold tracking-[0.16em] uppercase [font-stretch:82%]"
+				>
+					Rafael Galvez
+				</span>
+			</a>
+
+			<ul class="hidden items-center gap-7 font-mono text-[12.5px] text-muted md:flex">
+				{links.map((link) => (
+					<li>
+						<a
+							href={link.href}
+							class="border-b border-transparent pb-0.5 transition-colors hover:border-almagra hover:text-almagra"
+						>
+							{link.label}
+						</a>
+					</li>
+				))}
+				<li class="flex items-center gap-4 border-l border-linea pl-7">
+					{social.map((s) => (
+						<a
+							href={s.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label={s.label}
+							class="text-muted transition-colors hover:text-anil"
+						>
+							<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" set:html={icons[s.icon]} />
+						</a>
+					))}
+				</li>
+			</ul>
+
+			<button
+				id="menu-toggle"
+				type="button"
+				aria-label="Toggle menu"
+				aria-expanded="false"
+				aria-controls="mobile-menu"
+				class="flex h-10 w-10 items-center justify-center md:hidden"
 			>
-				RG
-			</span>
-			<span class="font-serif text-xl italic">Rafael Galvez</span>
-		</a>
-		<ul class="hidden items-center gap-8 text-[13px] font-medium tracking-wide text-muted uppercase md:flex">
+				<svg
+					id="menu-icon-open"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+				>
+					<path d="M3 6h18M3 12h18M3 18h18"></path>
+				</svg>
+				<svg
+					id="menu-icon-close"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					class="hidden"
+				>
+					<path d="M6 6l12 12M18 6L6 18"></path>
+				</svg>
+			</button>
+		</nav>
+
+		<ul
+			id="mobile-menu"
+			class="hidden flex-col border-t border-linea bg-cal px-6 py-3 font-mono text-[13px] text-muted md:hidden"
+		>
 			{links.map((link) => (
 				<li>
-					<a href={link.href} class="transition-colors hover:text-ink">{link.label}</a>
+					<a href={link.href} class="block border-b border-linea py-2.5 transition-colors hover:text-almagra">
+						{link.label}
+					</a>
 				</li>
 			))}
-			<li class="flex items-center gap-4 border-l border-line pl-8 normal-case">
+			<li class="flex items-center gap-5 pt-4">
 				{social.map((s) => (
-					<a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="transition-colors hover:text-accent">
-						{s.icon === 'github' ? (
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-								<path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.071 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.833.091-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.678.921.678 1.856 0 1.34-.012 2.421-.012 2.75 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-							</svg>
-						) : (
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-								<path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-3.96 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48Z" />
-							</svg>
-						)}
+					<a
+						href={s.href}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label={s.label}
+						class="text-muted transition-colors hover:text-anil"
+					>
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" set:html={icons[s.icon]} />
 					</a>
 				))}
 			</li>
 		</ul>
-		<button
-			id="menu-toggle"
-			type="button"
-			aria-label="Toggle menu"
-			aria-expanded="false"
-			aria-controls="mobile-menu"
-			class="flex h-10 w-10 items-center justify-center md:hidden"
-		>
-			<svg id="menu-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-				<path d="M3 6h18M3 12h18M3 18h18" />
-			</svg>
-			<svg id="menu-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden">
-				<path d="M6 6l12 12M18 6L6 18" />
-			</svg>
-		</button>
-	</nav>
-	<ul
-		id="mobile-menu"
-		class="hidden flex-col gap-1 border-t border-line px-6 py-4 text-[13px] font-medium tracking-wide text-muted uppercase md:hidden"
-	>
-		{links.map((link) => (
-			<li>
-				<a href={link.href} class="block py-2 transition-colors hover:text-ink">{link.label}</a>
-			</li>
-		))}
-		<li class="mt-2 flex items-center gap-4 border-t border-line pt-3 normal-case">
-			{social.map((s) => (
-				<a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="transition-colors hover:text-accent">
-					{s.icon === 'github' ? (
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.071 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.833.091-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.678.921.678 1.856 0 1.34-.012 2.421-.012 2.75 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" />
-						</svg>
-					) : (
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-3.96 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.68-2.91V8.48Z" />
-						</svg>
-					)}
-				</a>
-			))}
-		</li>
-	</ul>
+	</div>
 </header>
 
 <script>

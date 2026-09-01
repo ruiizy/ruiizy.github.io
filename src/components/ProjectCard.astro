@@ -8,45 +8,61 @@ interface Props {
 
 const { project, index } = Astro.props;
 const num = String(index).padStart(2, '0');
+
+const links = [
+	project.link ? { href: project.link, label: 'view' } : null,
+	project.repo ? { href: project.repo, label: 'code' } : null,
+].filter(Boolean) as { href: string; label: string }[];
 ---
 
-<article class="js-reveal group grid grid-cols-[32px_1fr] items-start gap-x-4 gap-y-4 border-b border-cream/15 py-7 sm:grid-cols-[56px_1fr_auto] sm:gap-x-6">
-	<span class="font-serif text-lg text-accent italic">{num}</span>
-	<div class="flex flex-col gap-2.5">
-		<h3 class="font-serif text-2xl font-normal transition-colors duration-200 group-hover:text-accent sm:text-3xl">
+<article
+	class="js-reveal group grid grid-cols-[44px_1fr] items-start gap-x-5 gap-y-5 border-b border-cal/15 py-8 sm:grid-cols-[72px_1fr_auto] sm:gap-x-8"
+>
+	<span
+		class="flex h-11 w-11 items-center justify-center border border-albero/45 bg-albero/10 font-mono text-[13px] text-albero transition-colors duration-200 group-hover:border-albero group-hover:bg-albero group-hover:text-tinta"
+	>
+		{num}
+	</span>
+
+	<div class="flex flex-col gap-3">
+		<h3
+			class="font-display text-2xl font-black tracking-[-0.02em] uppercase transition-colors duration-200 [font-stretch:85%] group-hover:text-albero sm:text-[34px]"
+		>
 			{project.title}
 		</h3>
-		<p class="max-w-115 text-sm leading-relaxed text-cream/75">
-			{project.description}
-		</p>
-		<div class="mt-1.5 flex flex-wrap gap-2.5">
+		<p class="max-w-125 text-[15px] leading-relaxed text-cal/75">{project.description}</p>
+		<ul class="mt-1 flex flex-wrap gap-2">
 			{project.tags.map((tag) => (
-				<span class="rounded-full border border-cream/25 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-cream/75 uppercase">
+				<li class="border border-cal/25 bg-cal/5 px-2.5 py-1 font-mono text-[11.5px] text-cal/80">
 					{tag}
-				</span>
+				</li>
 			))}
-		</div>
+		</ul>
 	</div>
-	<div class="col-span-2 flex flex-row items-center gap-5 pl-11 sm:col-span-1 sm:flex-col sm:items-end sm:gap-3 sm:pt-1.5 sm:pl-0">
-		{project.link && (
-			<a href={project.link} class="flex items-center gap-2 text-sm font-medium">
-				View
-				<span class="flex h-6 w-6 items-center justify-center rounded-full border border-current transition-colors duration-200 group-hover:border-accent group-hover:bg-accent">
-					<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-200 group-hover:stroke-cream">
-						<path d="M7 17L17 7" /><path d="M7 7h10v10" />
-					</svg>
-				</span>
+
+	<div class="col-span-2 flex flex-row gap-3 pl-16 sm:col-span-1 sm:flex-col sm:items-end sm:pt-1 sm:pl-0">
+		{links.map((l) => (
+			<a
+				href={l.href}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex items-center gap-2 border border-cal/30 bg-tinta px-3.5 py-2 font-mono text-[12.5px] transition-colors duration-200 hover:border-albero hover:bg-albero hover:text-tinta"
+			>
+				{l.label}
+				<svg
+					width="12"
+					height="12"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				>
+					<path d="M7 17L17 7"></path>
+					<path d="M7 7h10v10"></path>
+				</svg>
 			</a>
-		)}
-		{project.repo && (
-			<a href={project.repo} class="flex items-center gap-2 text-sm font-medium">
-				Code
-				<span class="flex h-6 w-6 items-center justify-center rounded-full border border-current transition-colors duration-200 group-hover:border-accent group-hover:bg-accent">
-					<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-200 group-hover:stroke-cream">
-						<path d="M7 17L17 7" /><path d="M7 7h10v10" />
-					</svg>
-				</span>
-			</a>
-		)}
+		))}
 	</div>
 </article>
